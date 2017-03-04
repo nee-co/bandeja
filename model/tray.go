@@ -18,9 +18,23 @@ type (
 
 func (t *Tray)GetTray(s dbr.Session,id int) error {
     _, err := s.Select("*").
-        From("trays").
-        Where("id = ?", id).
-        Load(t)
+                From("trays").
+                Where("id = ?", id).
+                Load(t)
 
     return err
+}
+
+func GetTrays(s dbr.Session) (*Trays, error) {
+    var results []Tray
+    trays := new(Trays)
+    _, err := s.Select("*").
+                From("trays").
+                Load(&results)
+
+    if err == nil {
+        trays.Trays = results
+    }
+
+    return trays, err
 }

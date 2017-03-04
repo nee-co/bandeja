@@ -12,6 +12,7 @@ func Init() *echo.Echo {
     e.Use(middleware.Logger())
     e.Use(middleware.Recover())
 
+    e.GET("/trays", handler.Trays)
     e.GET("/trays/:id", handler.Tray)
 
     return e

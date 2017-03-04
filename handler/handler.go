@@ -34,3 +34,18 @@ func Tray(c echo.Context) error {
         return c.JSON(http.StatusNotFound, nil)
     }
 }
+
+func Trays(c echo.Context) error {
+    if c.Request().Header.Get("x-consumer-custom-id") == "" {
+        return c.JSON(http.StatusUnauthorized, nil)
+    }
+
+    trays, err := model.GetTrays(*session)
+
+    if err != nil {
+        c.Error(err)
+        return err
+    } else {
+        return c.JSON(http.StatusOK, trays)
+    }
+}

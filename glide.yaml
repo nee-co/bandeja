@@ -1,0 +1,7 @@
+package: github.com/nee-co/bandeja
+import:
+- package: github.com/go-sql-driver/mysql
+- package: github.com/gocraft/dbr
+- package: github.com/kelseyhightower/envconfig
+- package: github.com/labstack/echo
+- package: github.com/Sirupsen/logrus

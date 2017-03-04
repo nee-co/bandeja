@@ -49,3 +49,20 @@ func Trays(c echo.Context) error {
         return c.JSON(http.StatusOK, trays)
     }
 }
+
+func UserTrays(c echo.Context) error {
+    userId, err := strconv.Atoi(c.Request().Header.Get("x-consumer-custom-id"))
+
+    if err != nil {
+        return c.JSON(http.StatusUnauthorized, nil)
+    }
+
+    userTrays, err := model.GetUserTrays(*session, userId)
+
+    if err != nil {
+        c.Error(err)
+        return err
+    } else {
+        return c.JSON(http.StatusOK, userTrays)
+    }
+}

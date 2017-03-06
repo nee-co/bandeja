@@ -2,6 +2,7 @@ package model
 
 import (
     "github.com/gocraft/dbr"
+    "github.com/Sirupsen/logrus"
 )
 
 type (
@@ -16,7 +17,7 @@ type (
     }
 )
 
-func (t *Tray)GetTray(s dbr.Session,id int) error {
+func (t *Tray) GetTray(s dbr.Session,id int) error {
     _, err := s.Select("*").
                 From("trays").
                 Where("id = ?", id).
@@ -37,4 +38,16 @@ func GetTrays(s dbr.Session) (*Trays, error) {
     }
 
     return trays, err
+}
+
+func IsUsableTray(s dbr.Session, id int) bool {
+    var tray Tray
+
+    if err := tray.GetTray(s, id); err != nil {
+        logrus.Error(err)
+    } else if tray.Id != 0 {
+        return true
+    }
+
+    return false
 }

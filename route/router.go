@@ -15,6 +15,6 @@ func Init() *echo.Echo {
     e.GET("/trays",     handler.Trays)
     e.GET("/trays/:id", handler.Tray)
     e.GET("/trays/my",  handler.UserTrays)
-
+    e.PUT("/trays/my",  handler.CreateOrUpdate)
     return e
 }

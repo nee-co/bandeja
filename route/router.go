@@ -1,9 +1,9 @@
 package route
 
 import (
+    "bandeja/handler"
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
-    "bandeja/handler"
 )
 
 func Init() *echo.Echo {
@@ -16,5 +16,6 @@ func Init() *echo.Echo {
     e.GET("/trays/:id", handler.Tray)
     e.GET("/trays/my",  handler.UserTrays)
     e.PUT("/trays/my",  handler.CreateOrUpdate)
+
     return e
 }

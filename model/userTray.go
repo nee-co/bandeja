@@ -43,9 +43,7 @@ func GetUserTrays(s dbr.Session, userId int) (*UserTrays, error) {
                 Where("user_id = ?", userId).
                 Load(&results)
 
-    if err == nil {
-        userTrays.UserTrays = results
-    }
+    userTrays.UserTrays = results
 
     return userTrays, err
 }

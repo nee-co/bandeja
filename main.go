@@ -1,9 +1,9 @@
 package main
 
 import (
+    "bandeja/route"
     "github.com/Sirupsen/logrus"
     "github.com/kelseyhightower/envconfig"
-    "bandeja/route"
 )
 
 type Conf struct {

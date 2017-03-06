@@ -23,8 +23,8 @@ func GetSession() *dbr.Session {
     }
 
     db, err := dbr.Open("mysql",
-        conf.USER+":"+conf.PASSWORD+"@tcp("+conf.HOST+":3306)/bandeja_production",
-        nil)
+                        conf.USER+":"+conf.PASSWORD+"@tcp("+conf.HOST+":3306)/bandeja_production",
+                        nil)
 
     if err != nil {
         logrus.Error(err)

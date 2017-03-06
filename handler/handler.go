@@ -12,22 +12,18 @@ import (
 var session = db.GetSession()
 
 func Tray(c echo.Context) error {
-    if c.Request().Header.Get("x-consumer-custom-id") == "" {
+    id,     _ := strconv.Atoi(c.Param("id"))
+    userId, _ := strconv.Atoi(c.Request().Header.Get("x-consumer-custom-id"))
+
+    if userId == 0 {
         return c.JSON(http.StatusUnauthorized, nil)
-    }
-
-    id, err := strconv.Atoi(c.Param("id"))
-
-    if err != nil {
-        logrus.Error(err)
-        return err
     }
 
     var tray model.Tray
 
     if err := tray.GetTray(*session, id); err != nil {
-        c.Error(err)
-        return err
+        logrus.Error(err)
+        return c.JSON(http.StatusInternalServerError, nil)
     } else if tray.Id != 0 {
         return c.JSON(http.StatusOK, tray)
     } else {
@@ -36,32 +32,34 @@ func Tray(c echo.Context) error {
 }
 
 func Trays(c echo.Context) error {
-    if c.Request().Header.Get("x-consumer-custom-id") == "" {
+    userId, _ := strconv.Atoi(c.Request().Header.Get("x-consumer-custom-id"))
+
+    if userId == 0 {
         return c.JSON(http.StatusUnauthorized, nil)
     }
 
     trays, err := model.GetTrays(*session)
 
     if err != nil {
-        c.Error(err)
-        return err
+        logrus.Error(err)
+        return c.JSON(http.StatusInternalServerError, nil)
     } else {
         return c.JSON(http.StatusOK, trays)
     }
 }
 
 func UserTrays(c echo.Context) error {
-    userId, err := strconv.Atoi(c.Request().Header.Get("x-consumer-custom-id"))
+    userId, _ := strconv.Atoi(c.Request().Header.Get("x-consumer-custom-id"))
 
-    if err != nil {
+    if userId == 0 {
         return c.JSON(http.StatusUnauthorized, nil)
     }
 
     userTrays, err := model.GetUserTrays(*session, userId)
 
     if err != nil {
-        c.Error(err)
-        return err
+        logrus.Error(err)
+        return c.JSON(http.StatusInternalServerError, nil)
     } else {
         return c.JSON(http.StatusOK, userTrays)
     }
@@ -74,11 +72,11 @@ func CreateOrUpdate(c echo.Context) error {
         return c.JSON(http.StatusUnauthorized, nil)
     }
 
-    params,  err := c.FormParams()
+    params, err := c.FormParams()
 
     if err != nil {
         logrus.Error(err)
-        return err
+        return c.JSON(http.StatusInternalServerError, nil)
     }
 
     trayId,  _ := strconv.Atoi(params.Get("tray_id"))

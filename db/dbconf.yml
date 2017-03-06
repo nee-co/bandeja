@@ -1,0 +1,21 @@
+test:
+    driver: mymysql
+    open: tcp:$BANDEJA_DATABASE_HOST:3306*bandeja_test/$BANDEJA_DATABASE_USER/$BANDEJA_DATABASE_PASSWORD
+
+development:
+    driver: mymysql
+    open: tcp:$BANDEJA_DATABASE_HOST:3306*bandeja_development/$BANDEJA_DATABASE_USER/$BANDEJA_DATABASE_PASSWORD
+    
+production:
+    driver: mymysql
+    open: tcp:$BANDEJA_DATABASE_HOST:3306*bandeja_production/$BANDEJA_DATABASE_USER/$BANDEJA_DATABASE_PASSWORD
+
+customimport:
+    driver: customdriver
+    open: customdriver open
+    import: github.com/custom/driver
+    dialect: mysql
+
+environment_variable_config:
+    driver: $DB_DRIVER
+    open: $DATABASE_URL

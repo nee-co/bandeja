@@ -1,0 +1,37 @@
+version: '2'
+services:
+  bandeja-database:
+    image: mariadb
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    environment:
+      MYSQL_DATABASE: bandeja_production
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_USER: $BANDEJA_DATABASE_USER
+      MYSQL_PASSWORD: $BANDEJA_DATABASE_PASSWORD
+    ports:
+      - "3306:3306"
+    volumes:
+      - bandeja:/var/lib/mysql
+    networks:
+      - bandeja
+  bandeja-application:
+    build: .
+    environment:
+      BANDEJA_PORT: 18080
+      BANDEJA_DATABASE_HOST: bandeja-database
+      BANDEJA_DATABASE_USER: root
+      BANDEJA_DATABASE_PASSWORD: root
+    depends_on:
+      - bandeja-database
+    ports:
+      - "18080:18080"
+    networks:
+      - bandeja
+
+volumes:
+  bandeja:
+    driver: local
+
+networks:
+  bandeja:
+    driver: bridge

@@ -1,7 +1,16 @@
 package: github.com/nee-co/bandeja
 import:
+- package: github.com/dgrijalva/jwt-go
 - package: github.com/go-sql-driver/mysql
 - package: github.com/gocraft/dbr
 - package: github.com/kelseyhightower/envconfig
+- package: github.com/mattn/go-colorable
+- package: github.com/mattn/go-isatty
 - package: github.com/labstack/echo
+- package: github.com/labstack/gommon
 - package: github.com/Sirupsen/logrus
+- package: github.com/valyala/bytebufferpool
+- package: github.com/valyala/fasttemplate
+- package: golang.org/x/crypto
+- package: golang.org/x/net
+- package: golang.org/x/sys

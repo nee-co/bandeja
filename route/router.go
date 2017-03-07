@@ -1,7 +1,7 @@
 package route
 
 import (
-    "bandeja/handler"
+    "github.com/nee-co/bandeja/handler"
     "github.com/labstack/echo"
     "github.com/labstack/echo/middleware"
 )

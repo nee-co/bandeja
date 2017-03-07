@@ -1,7 +1,7 @@
 package main
 
 import (
-    "bandeja/route"
+    "github.com/nee-co/bandeja/route"
     "github.com/Sirupsen/logrus"
     "github.com/kelseyhightower/envconfig"
 )

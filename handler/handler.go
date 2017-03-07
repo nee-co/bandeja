@@ -1,10 +1,10 @@
 package handler
 
 import (
-    "bandeja/db"
-    "bandeja/model"
     "net/http"
     "strconv"
+    "github.com/nee-co/bandeja/db"
+    "github.com/nee-co/bandeja/model"
     "github.com/labstack/echo"
     "github.com/Sirupsen/logrus"
 )
